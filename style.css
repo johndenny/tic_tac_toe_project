@@ -1,0 +1,33 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+p {
+    margin: 0;
+}
+
+#gameCntr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#boardCntr {
+    display: flex;
+    flex-wrap: wrap;
+    width: 610px;
+}
+
+#boardSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 52px;
+    width: 200px;
+    height: 200px;
+    background: pink;
+    border: 1px solid black;
+}
