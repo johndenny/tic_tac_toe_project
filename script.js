@@ -17,6 +17,8 @@ const gameBoard = {
     },
     winnerCheck: () => {
         let arry = gameBoard.gamePiecesArry;
+        let arryFull = gameBoard.gamePiecesArry.indexOf('');
+        arryFull === -1 ? gameBoard.tieMessage(): false;
         arry[0] === 'x' && arry[1] === 'x' && arry[2] === 'x' ? gameBoard.winnerMessage(): false;
         arry[3] === 'x' && arry[4] === 'x' && arry[5] === 'x' ? gameBoard.winnerMessage(): false;
         arry[6] === 'x' && arry[7] === 'x' && arry[8] === 'x' ? gameBoard.winnerMessage(): false;
@@ -32,7 +34,13 @@ const gameBoard = {
         arry[1] === 'o' && arry[4] === 'o' && arry[7] === 'o' ? gameBoard.winnerMessage(): false;
         arry[2] === 'o' && arry[5] === 'o' && arry[8] === 'o' ? gameBoard.winnerMessage(): false;
         arry[0] === 'o' && arry[4] === 'o' && arry[8] === 'o' ? gameBoard.winnerMessage(): false;
-        arry[2] === 'o' && arry[4] === 'o' && arry[6] === 'o' ? gameBoard.winnerMessage(): false;  
+        arry[2] === 'o' && arry[4] === 'o' && arry[6] === 'o' ? gameBoard.winnerMessage(): false;
+
+    },
+    tieMessage: () => {
+        document.querySelector('#msg').innerHTML = 'Tie. No One Wins.';
+        let popup = document.querySelector('#msgCntr');
+        popup.style.display = 'flex';
     },
     winnerMessage: () => {
         let msg = document.querySelector('#msg');
@@ -54,7 +62,6 @@ const popUpBckgrd = document.querySelector('#msgCntr');
 popUpBckgrd.addEventListener('click', gameBoard.newGame);
 
 const gamePeice = document.querySelectorAll('#boardSection');
-
 for (let i = 0; i < gamePeice.length; i++) {
     gamePeice[i].addEventListener('click', gameBoard.placePicker);
 }
