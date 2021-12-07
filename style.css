@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     height: 100%;
+    width: 100%;
 }
 
 p {
@@ -21,14 +22,33 @@ p {
 
 #msgBox {
     display: flex;
+    flex-direction: column;
     background: rgb(235, 235, 235);
     box-shadow: 1px 1px 1px rgb(185, 185, 185);
     padding: 15px;
     border-radius: 5px;
 }
 
+#myForm {
+    display: none;
+    flex-direction: column;
+}
+
+#titleTextCntr {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+}
+
+div#playerOneText {
+    display: flex;
+    align-self: flex-start;
+}
+
 #gameCntr {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;

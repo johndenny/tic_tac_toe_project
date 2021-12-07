@@ -6,6 +6,12 @@ const gameBoard = {
             document.getElementById('sec'+i).innerHTML = gameBoard.gamePiecesArry[i];
         }
     },
+    playerOne: 'Player One',
+    playerTwo: 'Player Two',
+    playerNamePrint: () => {
+        document.getElementById('playerNameX').innerHTML = gameBoard.playerOne + "'s Turn";
+        document.getElementById('playerNameO').innerHTML = gameBoard.playerTwo + "'s Turn";
+    },
     playerTurn: 'playerOne',
     placePicker: (e) => {
         let data = e.target.getAttribute('data-section');
@@ -52,17 +58,28 @@ const gameBoard = {
     },
     newGame: () => {
         gameBoard.gamePiecesArry = ['','','','','','','','',''];
+        gameBoard.playerOne = document.querySelector('input#playerXName').value;
+        gameBoard.playerTwo = document.querySelector('input#playerOName').value;
         gameBoard.gamePiecePrint();
+        gameBoard.playerNamePrint();
         let popup = document.querySelector('#msgCntr');
         popup.style.display = 'none';
+    },
+    newGameMenu: () => {
+        let form = document.querySelector('#myForm');
+        let popup = document.querySelector('#msgCntr');
+        form.style.display = 'flex';
+        popup.style.display = 'flex';
     }
 }
 
-const popUpBckgrd = document.querySelector('#msgCntr');
-popUpBckgrd.addEventListener('click', gameBoard.newGame);
+// const popUpBckgrd = document.querySelector('#msgCntr');
+// popUpBckgrd.addEventListener('click', gameBoard.newGame);
 
 const gamePeice = document.querySelectorAll('#boardSection');
 for (let i = 0; i < gamePeice.length; i++) {
     gamePeice[i].addEventListener('click', gameBoard.placePicker);
 }
+gameBoard.newGameMenu();
 gameBoard.gamePiecePrint();
+gameBoard.playerNamePrint();

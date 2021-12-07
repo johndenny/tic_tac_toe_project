@@ -14,11 +14,34 @@
 
             <p id="msg"></p>
 
+            <form id ="myForm">
+                <label>Player X's Name:</label><br>
+                <input id="playerXName"/><br>
+                <label>Player O's Name:</label><br>
+                <input id="playerOName"/><br>
+                <input type="button" value="Start Game" id="btnSubmit" onclick="gameBoard.newGame()">
+            </form>
+
         </div>
-        
+
     </div>
 
     <div id="gameCntr">
+
+        <div id="titleTextCntr">
+
+            <div id="playerOneText">
+                <p id="playerNameX">
+                </p>
+            </div>
+        
+        
+            <div id="playerTwoText">
+                <p id="playerNameO">
+                </p>
+            </div>
+
+        </div>
 
         <div id="boardCntr">
 
