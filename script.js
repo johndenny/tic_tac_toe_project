@@ -1,25 +1,37 @@
 const gameBoard = {
     gamePiecesArry: ['','','','','','','','',''],
+    computerArry: [0,1,2,3,4,5,6,7,8],
     gamePiecePrint: () => {
         let length = gameBoard.gamePiecesArry.length;
         for (i = 0; i<length; i++) {
             document.getElementById('sec'+i).innerHTML = gameBoard.gamePiecesArry[i];
         }
     },
-    playerOne: 'Player One',
-    playerTwo: 'Player Two',
     playerNamePrint: () => {
-        document.getElementById('playerNameX').innerHTML = gameBoard.playerOne + "'s Turn";
-        document.getElementById('playerNameO').innerHTML = gameBoard.playerTwo + "'s Turn";
+        document.getElementById('playerNameX').innerHTML = playerOne.name + " is X";
+        document.getElementById('playerNameO').innerHTML = playerTwo.name + " is O";
     },
     playerTurn: 'playerOne',
     placePicker: (e) => {
         let data = e.target.getAttribute('data-section');
-        gameBoard.playerTurn === 'playerOne' ? 
-            (gameBoard.gamePiecesArry.splice(data,1,'x'), gameBoard.playerTurn = 'playerTwo') :
-            (gameBoard.gamePiecesArry.splice(data,1,'o'), gameBoard.playerTurn = 'playerOne');
+        let compLocation = gameBoard.computerArry.indexOf(parseInt(data));
+        gameBoard.gamePiecesArry.splice(data,1,'x'), 
+        gameBoard.computerArry.splice(compLocation,1),
+        gameBoard.gamePiecePrint();
+        setTimeout(gameBoard.computerTurn(), 1000);
         gameBoard.gamePiecePrint();
         gameBoard.winnerCheck();
+    },
+    computerTurn: () => {
+        let position = gameBoard.getRandomInt(gameBoard.computerArry.length);
+        console.log(gameBoard.computerArry.length);
+        console.log(position);
+        let openSpace = gameBoard.computerArry[position];
+        gameBoard.computerArry.splice(position,1);
+        gameBoard.gamePiecesArry.splice(openSpace,1,'o');
+    },
+    getRandomInt: (max) => {
+        return Math.floor(Math.random() * max);
     },
     winnerCheck: () => {
         let arry = gameBoard.gamePiecesArry;
@@ -51,19 +63,24 @@ const gameBoard = {
     winnerMessage: () => {
         let msg = document.querySelector('#msg');
         gameBoard.playerTurn === 'playerOne' ? 
-            msg.innerHTML = 'O is the Winner' :
-            msg.innerHTML = 'X is the Winner' ;
+            msg.innerHTML = playerTwo.name+' is the Winner' :
+            msg.innerHTML = playerOne.name+' is the Winner' ;
         let popup = document.querySelector('#msgCntr');
         popup.style.display = 'flex';
     },
     newGame: () => {
         gameBoard.gamePiecesArry = ['','','','','','','','',''];
-        gameBoard.playerOne = document.querySelector('input#playerXName').value;
-        gameBoard.playerTwo = document.querySelector('input#playerOName').value;
-        gameBoard.gamePiecePrint();
-        gameBoard.playerNamePrint();
+        gameBoard.computerArry = [0,1,2,3,4,5,6,7,8];
+        playerOne.name = document.querySelector('input#playerXName').value;
+        playerTwo.name = document.querySelector('input#playerOName').value;
         let popup = document.querySelector('#msgCntr');
         popup.style.display = 'none';
+        let board = document.querySelector('#boardCntr');
+        board.style.display = 'flex';
+        gameBoard.gamePiecePrint();
+        gameBoard.playerNamePrint();
+        
+        
     },
     newGameMenu: () => {
         let form = document.querySelector('#myForm');
@@ -73,13 +90,18 @@ const gameBoard = {
     }
 }
 
-// const popUpBckgrd = document.querySelector('#msgCntr');
-// popUpBckgrd.addEventListener('click', gameBoard.newGame);
+const playerOne = {
+    name: 'Player One',
+    player: 'Human'
+}
+
+const playerTwo = {
+    name: 'Player Two',
+    player: 'Computer'
+}
 
 const gamePeice = document.querySelectorAll('#boardSection');
 for (let i = 0; i < gamePeice.length; i++) {
     gamePeice[i].addEventListener('click', gameBoard.placePicker);
 }
 gameBoard.newGameMenu();
-gameBoard.gamePiecePrint();
-gameBoard.playerNamePrint();

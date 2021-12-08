@@ -29,6 +29,11 @@ p {
     border-radius: 5px;
 }
 
+#msg {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
 #myForm {
     display: none;
     flex-direction: column;
@@ -56,7 +61,7 @@ div#playerOneText {
 }
 
 #boardCntr {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     width: 610px;
 }
